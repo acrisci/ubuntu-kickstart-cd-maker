@@ -27,10 +27,8 @@ Default usename is `user` and password is `p@ssw0rd!`.
 3 files are copied onto the CD image:
 
 * `ks.cfg` - This is the kickstart configuration file. Either edit by hand, or use `system-config-kickstart`. Copied to the root directory of the image (`/`).
-* `isolinux.cfg` - Copied to /isolinux on the image. The only thing I changed from the default is to set the `timeout` value to 10 (instead of 0, which means no timeout) so that you don't have to select a language upon boot.
-* `txt.cfg` - This is the file that contains that list boot options when you boot a Linux box.  You can set kernel boot parameters here.  Note that I added `ks=cdrom:/ks.cfg` to the params. Also copied to /isolinux on the image.
 
-`ubuntu-12.04.3-server-amd64.iso.MD5SUM` is the md5sum file for default ISO file which the script points to.  If you want to try a different distro, you'll need to download it manually, create a similar file with (`md5sum foobar.iso > foobar.iso.MD5SUM`) and edit the script accordingly.
+`MD5SUMS` is the md5sum file for default ISO file which the script points to.  If you want to try a different distro, you'll need to download it manually, create a similar file with (`md5sum foobar.iso > foobar.iso.MD5SUM`) and edit the script accordingly.
  
 ## Why would I want to use a disk over network booting with PXE/TFTP/etc?
 
