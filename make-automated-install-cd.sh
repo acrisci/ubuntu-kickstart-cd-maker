@@ -40,7 +40,22 @@ cp txt.cfg $WORK/isolinux/
 cp isolinux.cfg $WORK/isolinux/
 
 # magic mkiso incantation
-mkisofs -D -r -V “AUTOINSTALL” -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $OUTPUT $WORK
+mkisofs -D -r -V “AUTOINSTALL” -cache-inodes -J -l -e boot/grub/efi.img -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $OUTPUT $WORK
+echo '
+xorriso -as mkisofs \
+    -isohybrid-mbr /usr/share/syslinux/isohdpfx.bin \
+    -c isolinux/boot.cat \
+    -b isolinux/isolinux.bin \
+    -no-emul-boot \
+    -boot-load-size 4 \
+    -boot-info-table \
+    -eltorito-alt-boot \
+    -e boot/grub/efi.img \
+    -no-emul-boot \
+    -isohybrid-gpt-basdat \
+    -o $OUTPUT \
+    $WORK
+' > /dev/null
 
 # clean up after ourselves
 sudo umount $MOUNT
